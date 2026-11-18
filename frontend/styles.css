@@ -1,0 +1,70 @@
+/* 
+ * AgroExport Ica - Custom CSS Stylesheet
+ * Complementario a Tailwind CSS para sliders, badges y animaciones
+ */
+
+/* Estilos de Sliders personalizados */
+input[type=range] {
+  -webkit-appearance: none;
+  background: #e2e8f0;
+  border-radius: 9999px;
+  outline: none;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #16a34a;
+  cursor: pointer;
+  border: 2px solid #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+input[type=range]::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+  background: #15803d;
+}
+
+/* Range thumbs específicos */
+#range-agua::-webkit-slider-thumb {
+  background: #0284c7;
+}
+#range-radiacion::-webkit-slider-thumb {
+  background: #d97706;
+}
+#range-fertilizante::-webkit-slider-thumb {
+  background: #16a34a;
+}
+#range-antiguedad::-webkit-slider-thumb {
+  background: #b45309;
+}
+
+/* Focus styles */
+input[type=number]:focus {
+  border-color: #16a34a;
+  box-shadow: 0 0 0 2px rgba(22, 163, 74, 0.2);
+}
+
+/* Transición suave de contenedores */
+#res-progress-reefer {
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Scroll smooth */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Animación de pulso suave */
+@keyframes softPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+.pulse-soft {
+  animation: softPulse 2s infinite ease-in-out;
+}

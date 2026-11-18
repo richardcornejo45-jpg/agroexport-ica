@@ -1,0 +1,49 @@
+{
+    "fecha_generacion": "2026-11-18 15:00:08",
+    "empresa": "AgroExportadora del Sur S.A.C.",
+    "valle": "Ica, Perú",
+    "muestras_entrenamiento": 400,
+    "muestras_test": 100,
+    "variables_independientes": [
+        "hectareas_cultivadas",
+        "agua_riego_litros",
+        "radiacion_solar_horas",
+        "fertilizante_kg",
+        "antiguedad_terreno_anos"
+    ],
+    "variable_objetivo": "toneladas_cosecha",
+    "regresion_lineal": {
+        "nombre": "Regresión Lineal Simple (Baseline)",
+        "variables_usadas": [
+            "hectareas_cultivadas"
+        ],
+        "pendiente_coef": 16.4086,
+        "intercepto": -5.7771,
+        "mse": 7814.64,
+        "rmse": 88.4,
+        "mae": 68.2,
+        "r2": 0.5826
+    },
+    "red_neuronal": {
+        "nombre": "Red Neuronal Profunda (MLP Keras)",
+        "variables_usadas": [
+            "hectareas_cultivadas",
+            "agua_riego_litros",
+            "radiacion_solar_horas",
+            "fertilizante_kg",
+            "antiguedad_terreno_anos"
+        ],
+        "arquitectura": "Input(5) -> Dense(128, ReLU) -> Dense(64, ReLU) -> Dense(32, ReLU) -> Dense(16, ReLU) -> Dense(1, Linear)",
+        "optimizador": "Adam(lr_inicial=0.01 con ReduceLROnPlateau)",
+        "epocas_entrenadas": 180,
+        "mse": 1816.27,
+        "rmse": 42.62,
+        "mae": 30.09,
+        "r2": 0.903
+    },
+    "analisis_comparativo": {
+        "reduccion_rmse_porcentaje": 51.79,
+        "reduccion_rmse_toneladas": 45.78,
+        "incremento_r2_puntos": 0.3204
+    }
+}

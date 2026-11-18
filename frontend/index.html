@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AgroExport Ica - Optimización de Rendimiento & Logística de Uva de Mesa</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            agro: {
+              50: '#f0fdf4',
+              100: '#dcfce7',
+              500: '#22c55e',
+              600: '#16a34a',
+              700: '#15803d',
+              800: '#166534',
+              900: '#14532d',
+              dark: '#0f3d24'
+            },
+            grape: {
+              500: '#8b5cf6',
+              600: '#7c3aed',
+              700: '#6d28d9',
+              800: '#5b21b6'
+            },
+            sun: {
+              400: '#fbbf24',
+              500: '#f59e0b'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons & Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased font-['Plus_Jakarta_Sans',sans-serif]">
+
+  <!-- Top Announcement Bar -->
+  <div class="bg-gradient-to-r from-agro-900 via-agro-800 to-agro-dark text-emerald-100 text-xs py-2 px-4 border-b border-agro-700/50">
+    <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
+      <div class="flex items-center gap-2">
+        <span class="inline-flex items-center justify-center bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full text-[11px] font-semibold border border-emerald-500/30">
+          <i class="fa-solid fa-seedling mr-1"></i> Fundo Santa Rita • Ica, Perú
+        </span>
+        <span>AgroExportadora del Sur S.A.C. — Valle de Ica</span>
+      </div>
+      <div class="flex items-center gap-4 text-emerald-300/80">
+        <span id="api-status-badge" class="inline-flex items-center gap-1.5 text-xs text-emerald-300">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Sistema Predictivo Operativo
+        </span>
+        <span class="hidden md:inline">|</span>
+        <span class="hidden md:inline"><i class="fa-regular fa-clock mr-1"></i> Campaña Uva de Mesa 2026</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header & Navigation -->
+  <header class="bg-white/90 backdrop-blur-md sticky top-0 z-40 border-b border-slate-200 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-wrap justify-between items-center gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-agro-600 to-grape-700 flex items-center justify-center text-white text-2xl shadow-md shadow-agro-700/20">
+          <i class="fa-solid fa-wheat-awn"></i>
+        </div>
+        <div>
+          <h1 class="text-xl font-bold text-slate-900 tracking-tight leading-none flex items-center gap-2">
+            AgroExport Ica
+            <span class="text-[11px] font-bold bg-agro-100 text-agro-800 px-2 py-0.5 rounded uppercase tracking-wider">Deep Learning</span>
+          </h1>
+          <p class="text-xs text-slate-500 mt-1 font-medium">Predicción de Cosecha & Cubicaje de Contenedores Refrigerados</p>
+        </div>
+      </div>
+
+      <nav class="flex items-center gap-2 sm:gap-3 text-sm">
+        <a href="#simulador" class="px-3.5 py-2 rounded-lg font-semibold text-slate-700 hover:text-agro-700 hover:bg-slate-100 transition flex items-center gap-2">
+          <i class="fa-solid fa-sliders text-agro-600"></i> Simulador
+        </a>
+        <a href="#evidencia" class="px-3.5 py-2 rounded-lg font-semibold text-slate-700 hover:text-agro-700 hover:bg-slate-100 transition flex items-center gap-2">
+          <i class="fa-solid fa-chart-line text-grape-600"></i> Evidencia Técnica
+        </a>
+        <a href="/outputs/metricas.json" target="_blank" class="px-3.5 py-2 rounded-lg font-semibold text-slate-700 hover:text-agro-700 hover:bg-slate-100 transition flex items-center gap-2">
+          <i class="fa-solid fa-code text-amber-600"></i> JSON API
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Banner -->
+  <section class="bg-gradient-to-b from-white to-slate-100/80 border-b border-slate-200 py-10 px-4">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div class="lg:col-span-8">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold mb-4">
+            <i class="fa-solid fa-award text-emerald-600"></i> Modelo Agronómico Optimizado con TensorFlow / Keras
+          </div>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
+            Decisiones de cosecha precisas para <span class="text-agro-700">minimizar costos de flete</span> de exportación
+          </h2>
+          <p class="text-slate-600 mt-3 text-base sm:text-lg max-w-2xl leading-relaxed">
+            Reemplaza las estimaciones empíricas basadas solo en hectáreas por un modelo de <strong>Deep Learning Multivariable</strong> que captura la respuesta hídrica, fertilización, radiación solar y madurez del parrón en el Valle de Ica.
+          </p>
+        </div>
+        
+        <!-- Live KPIs Header Cards -->
+        <div class="lg:col-span-4 grid grid-cols-2 gap-3">
+          <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+            <span class="text-xs text-slate-500 font-medium uppercase tracking-wider block">Precisión $R^2$</span>
+            <div class="text-2xl font-bold text-agro-700 mt-1" id="kpi-r2">90.3%</div>
+            <span class="text-[11px] text-emerald-600 font-semibold flex items-center gap-1 mt-1">
+              <i class="fa-solid fa-arrow-trend-up"></i> +32.0 pts vs Baseline
+            </span>
+          </div>
+
+          <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+            <span class="text-xs text-slate-500 font-medium uppercase tracking-wider block">Reducción RMSE</span>
+            <div class="text-2xl font-bold text-agro-700 mt-1" id="kpi-rmse">-51.8%</div>
+            <span class="text-[11px] text-emerald-600 font-semibold flex items-center gap-1 mt-1">
+              <i class="fa-solid fa-circle-check"></i> Error de solo 42.6 t
+            </span>
+          </div>
+
+          <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+            <span class="text-xs text-slate-500 font-medium uppercase tracking-wider block">Capacidad Reefer</span>
+            <div class="text-2xl font-bold text-slate-800 mt-1">20 t</div>
+            <span class="text-[11px] text-slate-500 font-medium">Contenedor 40' High Cube</span>
+          </div>
+
+          <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+            <span class="text-xs text-slate-500 font-medium uppercase tracking-wider block">Lotes Evaluados</span>
+            <div class="text-2xl font-bold text-slate-800 mt-1">500</div>
+            <span class="text-[11px] text-slate-500 font-medium">Dataset MIDAGRI / ANA</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content Container -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-16">
+
+    <!-- ===================================================================== -->
+    <!-- SECTION 1: SIMULADOR DE COSECHA & CUBICAJE LOGÍSTICO                  -->
+    <!-- ===================================================================== -->
+    <section id="simulador" class="scroll-mt-24">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-agro-700 bg-agro-100 px-3 py-1 rounded-full">
+            Simulador Agronómico
+          </span>
+          <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2">
+            Simulador de Cosecha en Tiempo Real
+          </h3>
+          <p class="text-sm text-slate-500 mt-1">
+            Modifica las variables del lote agrícola para calcular de forma inmediata el tonelaje estimado y los contenedores de exportación requeridos.
+          </p>
+        </div>
+
+        <!-- Presets Buttons -->
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="text-xs font-semibold text-slate-500 mr-1">Escenarios Rápidos:</span>
+          <button type="button" onclick="aplicarPreset('optimo')" class="text-xs font-semibold bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 px-2.5 py-1.5 rounded-lg transition">
+            🌟 Manejo Óptimo
+          </button>
+          <button type="button" onclick="aplicarPreset('deficit')" class="text-xs font-semibold bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 px-2.5 py-1.5 rounded-lg transition">
+            💧 Estrés Hídrico
+          </button>
+          <button type="button" onclick="aplicarPreset('joven')" class="text-xs font-semibold bg-sky-50 hover:bg-sky-100 text-sky-800 border border-sky-300 px-2.5 py-1.5 rounded-lg transition">
+            🌱 Parrón Joven
+          </button>
+          <button type="button" onclick="aplicarPreset('antiguo')" class="text-xs font-semibold bg-purple-50 hover:bg-purple-100 text-purple-800 border border-purple-300 px-2.5 py-1.5 rounded-lg transition">
+            🍇 Cuartel Maduro
+          </button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        <!-- Simulator Controls (Left Column) -->
+        <div class="lg:col-span-6 bg-white p-6 sm:p-8 rounded-2xl border border-slate-200/90 shadow-md">
+          <form id="formulario-simulador" class="space-y-6">
+
+            <!-- 1. Hectáreas Cultivadas -->
+            <div>
+              <div class="flex justify-between items-center mb-1.5">
+                <label for="hectareas" class="text-sm font-bold text-slate-800 flex items-center gap-2">
+                  <i class="fa-solid fa-vector-square text-agro-600"></i> Hectáreas Cultivadas (ha)
+                </label>
+                <div class="flex items-center gap-1">
+                  <input type="number" id="num-hectareas" min="1.0" max="30.0" step="0.1" value="12.0"
+                         class="w-20 px-2 py-1 text-right text-sm font-bold border border-slate-300 rounded-md focus:ring-2 focus:ring-agro-500 focus:outline-none">
+                  <span class="text-xs text-slate-500 font-semibold">ha</span>
+                </div>
+              </div>
+              <input type="range" id="range-hectareas" min="1.0" max="25.0" step="0.1" value="12.0"
+                     class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-agro-600">
+              <div class="flex justify-between text-[11px] text-slate-400 mt-1">
+                <span>2.0 ha (Lote pequeño)</span>
+                <span>13.5 ha (Promedio Ica)</span>
+                <span>25.0 ha (Gran cuartel)</span>
+              </div>
+            </div>
+
+            <!-- 2. Agua de Riego Tecnificado -->
+            <div>
+              <div class="flex justify-between items-center mb-1.5">
+                <label for="agua" class="text-sm font-bold text-slate-800 flex items-center gap-2">
+                  <i class="fa-solid fa-faucet-drip text-sky-600"></i> Agua de Riego Total (Litros)
+                </label>
+                <div class="flex items-center gap-1">
+                  <input type="number" id="num-agua" min="10000000" max="350000000" step="1000000" value="132000000"
+                         class="w-32 px-2 py-1 text-right text-sm font-bold border border-slate-300 rounded-md focus:ring-2 focus:ring-agro-500 focus:outline-none">
+                  <span class="text-xs text-slate-500 font-semibold">L</span>
+                </div>
+              </div>
+              <input type="range" id="range-agua" min="20000000" max="300000000" step="1000000" value="132000000"
+                     class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-sky-600">
+              <div class="flex justify-between items-center text-[11px] text-slate-500 mt-1">
+                <span id="badge-dosis-agua" class="font-medium text-sky-700 bg-sky-50 px-2 py-0.5 rounded">
+                  Dosis: 11,000 m³/ha (Óptimo)
+                </span>
+                <span class="text-slate-400">Demanda ANA: 9,000 - 13,000 m³/ha</span>
+              </div>
+            </div>
+
+            <!-- 3. Radiación Solar -->
+            <div>
+              <div class="flex justify-between items-center mb-1.5">
+                <label for="radiacion" class="text-sm font-bold text-slate-800 flex items-center gap-2">
+                  <i class="fa-solid fa-sun text-amber-500"></i> Radiación Solar Acumulada (Horas)
+                </label>
+                <div class="flex items-center gap-1">
+                  <input type="number" id="num-radiacion" min="2200" max="3300" step="10" value="2780"
+                         class="w-24 px-2 py-1 text-right text-sm font-bold border border-slate-300 rounded-md focus:ring-2 focus:ring-agro-500 focus:outline-none">
+                  <span class="text-xs text-slate-500 font-semibold">hrs</span>
+                </div>
+              </div>
+              <input type="range" id="range-radiacion" min="2200" max="3200" step="10" value="2780"
+                     class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-amber-500">
+              <div class="flex justify-between text-[11px] text-slate-400 mt-1">
+                <span>2,300 hrs (Baja heliofanía)</span>
+                <span>2,750 hrs (Media desierto Ica)</span>
+                <span>3,200 hrs (Alta radiación)</span>
+              </div>
+            </div>
+
+            <!-- 4. Fertilizante N-P-K -->
+            <div>
+              <div class="flex justify-between items-center mb-1.5">
+                <label for="fertilizante" class="text-sm font-bold text-slate-800 flex items-center gap-2">
+                  <i class="fa-solid fa-flask-vial text-emerald-600"></i> Fertilizante Aplicado (kg)
+                </label>
+                <div class="flex items-center gap-1">
+                  <input type="number" id="num-fertilizante" min="500" max="18000" step="50" value="5800"
+                         class="w-24 px-2 py-1 text-right text-sm font-bold border border-slate-300 rounded-md focus:ring-2 focus:ring-agro-500 focus:outline-none">
+                  <span class="text-xs text-slate-500 font-semibold">kg</span>
+                </div>
+              </div>
+              <input type="range" id="range-fertilizante" min="1000" max="16000" step="50" value="5800"
+                     class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-emerald-600">
+              <div class="flex justify-between items-center text-[11px] text-slate-500 mt-1">
+                <span id="badge-dosis-fert" class="font-medium text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">
+                  Dosis: 483.3 kg/ha
+                </span>
+                <span class="text-slate-400">Rango agronómico: 350 - 650 kg/ha</span>
+              </div>
+            </div>
+
+            <!-- 5. Antigüedad del Terreno -->
+            <div>
+              <div class="flex justify-between items-center mb-1.5">
+                <label for="antiguedad" class="text-sm font-bold text-slate-800 flex items-center gap-2">
+                  <i class="fa-solid fa-tree text-amber-700"></i> Antigüedad del Parrón (Años)
+                </label>
+                <div class="flex items-center gap-1">
+                  <input type="number" id="num-antiguedad" min="1" max="20" step="1" value="7"
+                         class="w-16 px-2 py-1 text-right text-sm font-bold border border-slate-300 rounded-md focus:ring-2 focus:ring-agro-500 focus:outline-none">
+                  <span class="text-xs text-slate-500 font-semibold">años</span>
+                </div>
+              </div>
+              <input type="range" id="range-antiguedad" min="1" max="20" step="1" value="7"
+                     class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-amber-700">
+              <div class="flex justify-between items-center text-[11px] text-slate-500 mt-1">
+                <span id="badge-estado-parron" class="font-semibold text-purple-700 bg-purple-50 px-2 py-0.5 rounded">
+                  Estado: Plena Producción Comercial (Años 5-11)
+                </span>
+                <span class="text-slate-400">1 a 20 años</span>
+              </div>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" id="btn-predecir"
+                    class="w-full bg-gradient-to-r from-agro-700 via-agro-600 to-agro-800 hover:from-agro-800 hover:to-agro-900 text-white font-bold py-3.5 px-6 rounded-xl shadow-lg shadow-agro-700/30 transition transform hover:-translate-y-0.5 flex items-center justify-center gap-2 text-base">
+              <i class="fa-solid fa-calculator"></i> Estimar Cosecha & Logística
+            </button>
+          </form>
+        </div>
+
+        <!-- Prediction Results (Right Column) -->
+        <div class="lg:col-span-6 space-y-6">
+
+          <!-- Primary Result Card (Deep Learning) -->
+          <div class="bg-gradient-to-br from-agro-900 via-agro-800 to-agro-dark text-white p-7 rounded-2xl shadow-xl relative overflow-hidden border border-agro-700">
+            <div class="absolute -right-8 -bottom-8 text-agro-700/20 text-9xl pointer-events-none">
+              <i class="fa-solid fa-brain"></i>
+            </div>
+            
+            <div class="flex justify-between items-start mb-4">
+              <span class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider bg-emerald-500/20 text-emerald-300 px-3 py-1 rounded-full border border-emerald-500/30">
+                <span class="w-2 h-2 rounded-full bg-emerald-400"></span> Proyección Deep Learning (Keras MLP)
+              </span>
+              <span class="text-xs text-emerald-200/70 font-mono">Alta Precisión</span>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4 my-4">
+              <div>
+                <span class="text-xs text-emerald-200 uppercase font-medium">Toneladas Proyectadas</span>
+                <div class="text-4xl sm:text-5xl font-extrabold text-white tracking-tight mt-1" id="res-toneladas-nn">
+                  --
+                </div>
+                <div class="text-xs text-emerald-300 font-semibold mt-1" id="res-rinde-ha-nn">
+                  Rendimiento: -- t/ha
+                </div>
+              </div>
+
+              <div>
+                <span class="text-xs text-emerald-200 uppercase font-medium">Contenedores 40' Reefer</span>
+                <div class="text-4xl sm:text-5xl font-extrabold text-amber-300 tracking-tight mt-1 flex items-baseline gap-2">
+                  <span id="res-contenedores-nn">--</span>
+                  <span class="text-base text-amber-200 font-medium">FEU</span>
+                </div>
+                <div class="text-xs text-amber-200 font-medium mt-1" id="res-remanente-nn">
+                  Último contenedor: --%
+                </div>
+              </div>
+            </div>
+
+            <!-- Reefer Progress Bar -->
+            <div class="mt-4 pt-4 border-t border-agro-700/60">
+              <div class="flex justify-between text-xs text-emerald-200 mb-1">
+                <span>Llenado del último contenedor refrigerado</span>
+                <span id="res-pct-text" class="font-bold text-amber-300">--%</span>
+              </div>
+              <div class="w-full bg-agro-950/60 rounded-full h-2.5 overflow-hidden">
+                <div id="res-progress-reefer" class="bg-gradient-to-r from-amber-400 to-emerald-400 h-2.5 rounded-full transition-all duration-500" style="width: 0%"></div>
+              </div>
+            </div>
+
+            <!-- Agronomic Diagnostic Box -->
+            <div class="mt-4 p-3 rounded-lg bg-emerald-950/40 border border-emerald-500/30 text-xs text-emerald-100 flex items-start gap-2.5">
+              <i class="fa-solid fa-stethoscope text-emerald-400 mt-0.5"></i>
+              <div>
+                <strong class="block text-emerald-300">Diagnóstico Biofísico del Lote:</strong>
+                <span id="res-diagnostico">Configure los parámetros del simulador para obtener el análisis biofísico.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Baseline Model Comparison Card -->
+          <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-md space-y-4">
+            <div class="flex justify-between items-center pb-3 border-b border-slate-100">
+              <h4 class="text-sm font-bold text-slate-800 flex items-center gap-2">
+                <i class="fa-solid fa-chart-simple text-slate-500"></i> Comparativa con Baseline (Regresión Lineal)
+              </h4>
+              <span class="text-xs bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-mono">Solo Hectáreas</span>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+              <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                <span class="text-xs text-slate-500 font-medium">Predicción Lineal Simple</span>
+                <div class="text-2xl font-bold text-slate-700 mt-1" id="res-toneladas-lr">-- t</div>
+                <span class="text-xs text-slate-500" id="res-rinde-ha-lr">Rinde: -- t/ha</span>
+              </div>
+
+              <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                <span class="text-xs text-slate-500 font-medium">Contenedores Estimados (LR)</span>
+                <div class="text-2xl font-bold text-slate-700 mt-1" id="res-contenedores-lr">-- FEU</div>
+                <span class="text-xs text-slate-500">Cálculo empírico</span>
+              </div>
+            </div>
+
+            <!-- Error gap warning -->
+            <div id="res-alerta-gap" class="p-3 rounded-xl bg-amber-50 border border-amber-200 text-xs text-amber-900 flex items-start gap-2">
+              <i class="fa-solid fa-triangle-exclamation text-amber-600 mt-0.5"></i>
+              <div>
+                <strong>Desviación del Modelo Tradicional:</strong>
+                <p id="res-gap-text" class="mt-0.5">
+                  La regresión lineal simple no considera el balance de agua ni fertilización, lo que genera sobrecostos en fletes marítimos.
+                </p>
+              </div>
+            </div>
+
+            <!-- Logistic Dispatch Recommendation -->
+            <div class="p-3 rounded-xl bg-blue-50 border border-blue-200 text-xs text-blue-900 flex items-start gap-2">
+              <i class="fa-solid fa-ship text-blue-600 mt-0.5"></i>
+              <div>
+                <strong>Recomendación Logística Portuaria:</strong>
+                <p id="res-recomendacion" class="mt-0.5">
+                  Ejecute la estimación para calcular la orden de reserva de reefers en el Puerto de Pisco / Callao.
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- SECTION 2: PANEL DE EVIDENCIA TÉCNICA & MÉTRICAS                     -->
+    <!-- ===================================================================== -->
+    <section id="evidencia" class="scroll-mt-24 pt-6 border-t border-slate-200">
+      <div class="mb-8">
+        <span class="text-xs font-bold uppercase tracking-wider text-grape-700 bg-purple-100 px-3 py-1 rounded-full">
+          Validación Experimental
+        </span>
+        <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2">
+          Panel de Evidencia Técnica & Métricas de Desempeño
+        </h3>
+        <p class="text-sm text-slate-500 mt-1">
+          Comparativa científica rigurosa entre el modelo tradicional estadístico y la arquitectura de Deep Learning en el conjunto de prueba (100 lotes ciegos).
+        </p>
+      </div>
+
+      <!-- Comparative Metrics Table Card -->
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-md overflow-hidden mb-10">
+        <div class="px-6 py-4 bg-slate-900 text-white flex flex-wrap justify-between items-center gap-2">
+          <div class="flex items-center gap-2">
+            <i class="fa-solid fa-table-list text-emerald-400"></i>
+            <h4 class="font-bold text-sm tracking-wide">Matriz Comparativa de Métricas de Evaluación (Test Set)</h4>
+          </div>
+          <span class="text-xs text-slate-400 font-mono">500 Lotes Totales | 80% Train | 20% Test</span>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-sm text-slate-700">
+            <thead class="bg-slate-100 text-xs uppercase text-slate-600 font-bold border-b border-slate-200">
+              <tr>
+                <th class="px-6 py-3.5">Modelo Evaluado</th>
+                <th class="px-6 py-3.5">Variables Involucradas</th>
+                <th class="px-6 py-3.5 text-right">MSE (t²)</th>
+                <th class="px-6 py-3.5 text-right">RMSE (Toneladas)</th>
+                <th class="px-6 py-3.5 text-right">MAE (Toneladas)</th>
+                <th class="px-6 py-3.5 text-right">Coeficiente $R^2$</th>
+                <th class="px-6 py-3.5 text-center">Estado Operativo</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200 font-medium">
+              <tr class="hover:bg-slate-50 transition">
+                <td class="px-6 py-4 font-bold text-slate-900 flex items-center gap-2">
+                  <span class="w-3 h-3 rounded-full bg-slate-400"></span>
+                  Regresión Lineal Simple
+                </td>
+                <td class="px-6 py-4 text-xs text-slate-500">Únicamente Hectáreas Cultivadas</td>
+                <td class="px-6 py-4 text-right font-mono" id="table-lr-mse">7,814.64</td>
+                <td class="px-6 py-4 text-right font-mono text-rose-600 font-bold" id="table-lr-rmse">88.40 t</td>
+                <td class="px-6 py-4 text-right font-mono text-slate-600" id="table-lr-mae">68.20 t</td>
+                <td class="px-6 py-4 text-right font-mono font-bold text-slate-700" id="table-lr-r2">0.5826 (58.3%)</td>
+                <td class="px-6 py-4 text-center">
+                  <span class="inline-block bg-slate-100 text-slate-600 text-[11px] font-semibold px-2 py-0.5 rounded">
+                    Baseline Superado
+                  </span>
+                </td>
+              </tr>
+
+              <tr class="bg-emerald-50/50 hover:bg-emerald-50 transition">
+                <td class="px-6 py-4 font-bold text-agro-900 flex items-center gap-2">
+                  <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
+                  Red Neuronal Profunda (MLP)
+                </td>
+                <td class="px-6 py-4 text-xs text-emerald-800 font-semibold">
+                  Hectáreas + Agua + Radiación + Fertilizante + Edad
+                </td>
+                <td class="px-6 py-4 text-right font-mono text-agro-900 font-bold" id="table-nn-mse">1,816.27</td>
+                <td class="px-6 py-4 text-right font-mono text-emerald-700 font-extrabold" id="table-nn-rmse">42.62 t</td>
+                <td class="px-6 py-4 text-right font-mono text-emerald-700 font-bold" id="table-nn-mae">30.09 t</td>
+                <td class="px-6 py-4 text-right font-mono font-extrabold text-emerald-700" id="table-nn-r2">0.9030 (90.3%)</td>
+                <td class="px-6 py-4 text-center">
+                  <span class="inline-block bg-emerald-600 text-white text-[11px] font-bold px-2.5 py-0.5 rounded shadow-sm">
+                    Recomendado en Producción
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="px-6 py-3 bg-slate-50 border-t border-slate-200 text-xs text-slate-600 flex flex-wrap justify-between items-center gap-2">
+          <span class="font-semibold text-emerald-700 flex items-center gap-1.5">
+            <i class="fa-solid fa-circle-check"></i>
+            Mejora de Precisión: Reducción del 51.79% en el error cuadrático medio (RMSE)
+          </span>
+          <span class="text-slate-500">Norma MIDAGRI / ANA — Uva de Mesa de Exportación Ica</span>
+        </div>
+      </div>
+
+      <!-- 3 Technical Plots Gallery -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <!-- Plot 1: Regresión Lineal -->
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-md overflow-hidden flex flex-col">
+          <div class="p-4 border-b border-slate-100 flex items-center justify-between">
+            <span class="text-xs font-bold uppercase text-slate-500">Gráfica 1 • Baseline</span>
+            <span class="text-[11px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-mono">Dispersión vs Ajuste</span>
+          </div>
+          <div class="p-3 bg-slate-50 flex items-center justify-center">
+            <img src="/outputs/regresion_lineal_uva.png" alt="Regresión Lineal Simple Uva Ica"
+                 class="w-full h-auto rounded-lg shadow-sm border border-slate-200 cursor-pointer hover:opacity-95 transition"
+                 onclick="abrirModalImagen('/outputs/regresion_lineal_uva.png', 'Regresión Lineal Simple: Relación Hectáreas vs Cosecha')">
+          </div>
+          <div class="p-4 flex-1 flex flex-col justify-between">
+            <div>
+              <h5 class="text-sm font-bold text-slate-900">Ajuste Lineal por Hectáreas</h5>
+              <p class="text-xs text-slate-600 mt-1 leading-relaxed">
+                Muestra la alta dispersión de datos reales respecto a la recta de regresión. Lotes con igual área rinden distinto debido al estrés hídrico o madurez del parrón.
+              </p>
+            </div>
+            <div class="mt-3 pt-3 border-t border-slate-100 flex justify-between text-[11px] text-slate-500">
+              <span>$R^2 = 0.583$</span>
+              <span class="text-rose-600 font-semibold">RMSE = 88.4 t</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Plot 2: Curva de Aprendizaje -->
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-md overflow-hidden flex flex-col">
+          <div class="p-4 border-b border-slate-100 flex items-center justify-between">
+            <span class="text-xs font-bold uppercase text-emerald-700">Gráfica 2 • Deep Learning</span>
+            <span class="text-[11px] bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded font-mono">Pérdida Keras</span>
+          </div>
+          <div class="p-3 bg-slate-50 flex items-center justify-center">
+            <img src="/outputs/curva_aprendizaje_uva.png" alt="Curva de Aprendizaje Keras Uva Ica"
+                 class="w-full h-auto rounded-lg shadow-sm border border-slate-200 cursor-pointer hover:opacity-95 transition"
+                 onclick="abrirModalImagen('/outputs/curva_aprendizaje_uva.png', 'Curva de Aprendizaje: Evolución de Loss (MSE) en Keras')">
+          </div>
+          <div class="p-4 flex-1 flex flex-col justify-between">
+            <div>
+              <h5 class="text-sm font-bold text-slate-900">Convergencia de la Red Neuronal</h5>
+              <p class="text-xs text-slate-600 mt-1 leading-relaxed">
+                Evolución del MSE en entrenamiento y validación. Demuestra una convergencia estable del optimizador Adam y ausencia de sobreajuste gracias a la regularización.
+              </p>
+            </div>
+            <div class="mt-3 pt-3 border-t border-slate-100 flex justify-between text-[11px] text-slate-500">
+              <span>Activación: ReLU</span>
+              <span class="text-emerald-600 font-semibold">Convergencia Óptima</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Plot 3: Comparación de Modelos -->
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-md overflow-hidden flex flex-col">
+          <div class="p-4 border-b border-slate-100 flex items-center justify-between">
+            <span class="text-xs font-bold uppercase text-purple-700">Gráfica 3 • Comparativa</span>
+            <span class="text-[11px] bg-purple-100 text-purple-800 px-2 py-0.5 rounded font-mono">RMSE & R²</span>
+          </div>
+          <div class="p-3 bg-slate-50 flex items-center justify-center">
+            <img src="/outputs/comparacion_modelos_uva.png" alt="Comparación de Modelos Uva Ica"
+                 class="w-full h-auto rounded-lg shadow-sm border border-slate-200 cursor-pointer hover:opacity-95 transition"
+                 onclick="abrirModalImagen('/outputs/comparacion_modelos_uva.png', 'Comparativa de Modelos: Reducción de RMSE e Incremento de R²')">
+          </div>
+          <div class="p-4 flex-1 flex flex-col justify-between">
+            <div>
+              <h5 class="text-sm font-bold text-slate-900">Salto Cualitativo de Precisión</h5>
+              <p class="text-xs text-slate-600 mt-1 leading-relaxed">
+                Demuestra el salto de precisión entre ambos paradigmas. El error RMSE se reduce a la mitad y el coeficiente $R^2$ asciende de 58.3% a 90.3%.
+              </p>
+            </div>
+            <div class="mt-3 pt-3 border-t border-slate-100 flex justify-between text-[11px] text-slate-500">
+              <span class="text-emerald-700 font-bold">Error: -51.8%</span>
+              <span class="text-emerald-700 font-bold">$R^2$: 90.3%</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Modal Lightbox for Images -->
+  <div id="modal-imagen" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="max-w-4xl w-full bg-white rounded-2xl overflow-hidden shadow-2xl relative">
+      <div class="p-4 bg-slate-900 text-white flex justify-between items-center">
+        <h5 id="modal-titulo" class="font-bold text-sm">Visualización Técnica</h5>
+        <button onclick="cerrarModalImagen()" class="text-slate-400 hover:text-white text-lg px-2">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="p-4 bg-slate-100 flex items-center justify-center max-h-[80vh] overflow-auto">
+        <img id="modal-img-tag" src="" alt="Gráfica Ampliada" class="max-w-full h-auto rounded-lg border border-slate-300">
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-slate-900 text-slate-400 text-xs py-8 border-t border-slate-800 mt-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-lg bg-agro-700 flex items-center justify-center text-white font-bold">
+          <i class="fa-solid fa-seedling"></i>
+        </div>
+        <div>
+          <span class="text-white font-bold block text-sm">AgroExportadora del Sur S.A.C.</span>
+          <span>Valle de Ica, Región Ica — Perú • RUC: 20534891234</span>
+        </div>
+      </div>
+      <div class="text-center md:text-right text-slate-400">
+        <p>Sistema Integral de Optimización Agronómica & Logística Portuaria (Pisco / Callao)</p>
+        <p class="text-slate-500 mt-1">Desarrollado con FastAPI • TensorFlow/Keras • Scikit-Learn • Tailwind CSS</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/app.js"></script>
+</body>
+</html>
